@@ -1,28 +1,21 @@
 # SQL Notes Summary
 
-To create a downloadable file:
-1. Copy all the content below this line.
-2. Open a text editor (like Notepad, TextEdit, or VS Code).
-3. Paste the copied content into the text editor.
-4. Save the file with a .md extension (e.g., "SQL_Notes_Summary.md").
-
----
-
-# SQL Notes Summary
-
 ## 1. JOIN Operators
 
 ### Inner Join
+
 - Cross Join (X): Cartesian product
 - Natural Join (⋈): Cross join with union of attributes
 - Theta Join (⋈C): Natural join with boolean condition
 
 ### Outer Join
+
 - Left Outer Join (⟕): All left tuples, matching right tuples
 - Right Outer Join (⟖): All right tuples, matching left tuples
 - Full Outer Join (⟗): Union of left and right joins
 
 ### Self Join
+
 - Joining a table to itself
 
 ## 2. JOIN Details
@@ -47,6 +40,7 @@ To create a downloadable file:
 ## 5. Database Modifications (DML)
 
 ### INSERT
+
 ```sql
 INSERT INTO <relation> VALUES (<list of values>);
 INSERT INTO <relation>(attr1, attr2) VALUES (val1, val2);
@@ -54,11 +48,13 @@ INSERT INTO <relation> (<subquery>);
 ```
 
 ### DELETE
+
 ```sql
 DELETE FROM <relation> WHERE <condition>;
 ```
 
 ### UPDATE
+
 ```sql
 UPDATE <relation> SET <attribute assignments> WHERE <condition>;
 ```
@@ -74,6 +70,7 @@ UPDATE <relation> SET <attribute assignments> WHERE <condition>;
 ## Answer Sheet
 
 1. Employee-Department Join:
+
 ```sql
 SELECT e.id, e.name, d.dept_name
 FROM Department d
@@ -82,6 +79,7 @@ WHERE d.location = 'New York';
 ```
 
 2. Top 3 Expensive Beers:
+
 ```sql
 WITH RankedBeers AS (
   SELECT bar, beer, price,
@@ -95,6 +93,7 @@ WHERE price_rank <= 3 AND beer_count > 5;
 ```
 
 3. Above-Average Customers:
+
 ```sql
 WITH CityAvg AS (
   SELECT c.city, AVG(o.total_amount) as avg_amount,
@@ -113,6 +112,7 @@ HAVING AVG(o.total_amount) > ca.avg_amount;
 ```
 
 4. Insert High-Value Customers:
+
 ```sql
 INSERT INTO HighValueCustomers (customer_id, name, total_spent)
 SELECT c.customer_id, c.name, SUM(o.total_amount) as total_spent
@@ -123,6 +123,7 @@ HAVING SUM(o.total_amount) > 10000;
 ```
 
 5. Update Beer Prices:
+
 ```sql
 WITH BarAvg AS (
   SELECT bar, AVG(price) as avg_price
@@ -141,4 +142,3 @@ WHERE EXISTS (
   WHERE ba.bar = s.bar AND ba.avg_price < oa.overall_avg
 );
 ```
-

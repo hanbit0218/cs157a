@@ -11,6 +11,7 @@ SQL (Structured Query Language) is used for querying and managing relational dat
 ## 2. Creating Database Schemas (DDL)
 
 ### Creating Tables
+
 ```sql
 CREATE TABLE <name> (
   <list of elements>
@@ -18,12 +19,15 @@ CREATE TABLE <name> (
 ```
 
 ### Deleting Tables
+
 ```sql
 DROP TABLE <name>;
 ```
 
 ### Declaring Keys
+
 Single-attribute key:
+
 ```sql
 CREATE TABLE Beers (
   name CHAR(20) UNIQUE,
@@ -32,6 +36,7 @@ CREATE TABLE Beers (
 ```
 
 Multi-attribute key:
+
 ```sql
 CREATE TABLE Sells (
   bar CHAR(20),
@@ -42,12 +47,14 @@ CREATE TABLE Sells (
 ```
 
 ### PRIMARY KEY vs. UNIQUE
+
 - Only one PRIMARY KEY per relation, multiple UNIQUE attributes allowed.
 - PRIMARY KEY cannot contain NULL values, UNIQUE can.
 
 ## 3. SQL Queries (DML)
 
 ### Basic Structure
+
 ```sql
 SELECT desired attributes
 FROM one or more tables
@@ -55,11 +62,12 @@ WHERE condition about tuples of the tables
 ```
 
 ### Key Features
+
 - Use `*` to select all attributes
 - Rename attributes with `AS`
 - Use expressions in SELECT clauses
 - Complex conditions in WHERE clause using AND, OR, NOT, and comparison operators
-- Pattern matching with LIKE and wildcards (% and _)
+- Pattern matching with LIKE and wildcards (% and \_)
 - NULL values and three-valued logic (TRUE, FALSE, UNKNOWN)
 - Multi-table queries using comma-separated table names in FROM clause
 - Self-joins using table aliases
@@ -75,30 +83,38 @@ WHERE condition about tuples of the tables
 ## Practice Problems
 
 ### Problem 1
+
 Given the schema:
+
 ```sql
 Employees(id, name, department, salary)
 Departments(id, name, budget)
 Projects(id, name, department_id)
 Assignments(employee_id, project_id, hours)
 ```
+
 Find the names of employees who work on all projects in their department.
 
 ### Problem 2
+
 Using the same schema, find the department with the highest average salary, but only consider departments with more than 5 employees.
 
 ### Problem 3
+
 Create a table schema for a university database that includes students, courses, professors, and enrollments. Include appropriate primary and foreign keys, and at least one multi-attribute key.
 
 ### Problem 4
+
 Find pairs of employees who have worked on the same project for more than 100 hours each. Order the results by the sum of their hours in descending order.
 
 ### Problem 5
+
 Create a query that returns a result set with three columns: department name, number of employees, and a category (Small: <10 employees, Medium: 10-50 employees, Large: >50 employees).
 
 ## Answer Sheet
 
 ### Answer 1
+
 ```sql
 SELECT DISTINCT e.name
 FROM Employees e
@@ -115,6 +131,7 @@ WHERE NOT EXISTS (
 ```
 
 ### Answer 2
+
 ```sql
 SELECT d.name, AVG(e.salary) as avg_salary
 FROM Departments d
@@ -126,6 +143,7 @@ LIMIT 1;
 ```
 
 ### Answer 3
+
 ```sql
 CREATE TABLE Students (
   id INT PRIMARY KEY,
@@ -161,8 +179,9 @@ CREATE TABLE Enrollments (
 ```
 
 ### Answer 4
+
 ```sql
-SELECT e1.name AS employee1, e2.name AS employee2, 
+SELECT e1.name AS employee1, e2.name AS employee2,
        a1.project_id, (a1.hours + a2.hours) AS total_hours
 FROM Assignments a1
 JOIN Assignments a2 ON a1.project_id = a2.project_id
@@ -174,10 +193,11 @@ ORDER BY total_hours DESC;
 ```
 
 ### Answer 5
+
 ```sql
-SELECT d.name AS department_name, 
+SELECT d.name AS department_name,
        COUNT(e.id) AS num_employees,
-       CASE 
+       CASE
          WHEN COUNT(e.id) < 10 THEN 'Small'
          WHEN COUNT(e.id) BETWEEN 10 AND 50 THEN 'Medium'
          ELSE 'Large'
