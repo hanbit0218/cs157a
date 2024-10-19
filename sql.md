@@ -1,4 +1,4 @@
-# SQL Summary, Notes, and Practice Problems
+# SQL
 
 ## 1. SQL Overview
 

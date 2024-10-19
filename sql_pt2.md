@@ -1,4 +1,4 @@
-# SQL Notes Summary
+# SQL pt2
 
 ## 1. JOIN Operators
 
